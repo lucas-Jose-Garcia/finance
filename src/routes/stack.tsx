@@ -7,7 +7,7 @@ import { CustomNavigationBar } from '../components/CustomNavigationBar';
 
 type StackNavigation = {
     Home: undefined
-    Add: undefined
+    Lançamentos: undefined
 }
 
 export type StackTypes = NativeStackNavigationProp<StackNavigation> 
@@ -24,7 +24,7 @@ export function StackNavigation() {
                 }}
             >
                 <Stack.Screen name="Home" component={Home} />
-                <Stack.Screen name="Add" component={Add} />
+                <Stack.Screen name="Lançamentos" component={Add} />
             </Stack.Navigator>
         </NavigationContainer>
     )

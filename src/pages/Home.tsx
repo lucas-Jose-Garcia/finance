@@ -35,7 +35,7 @@ export function Home() {
       <FAB 
           icon="plus"
           style={styles.fab}
-          onPress={() => navigation.navigate('Add')}
+          onPress={() => navigation.navigate('Lançamentos')}
       />
       <StatusBar style="auto" />
     </SafeAreaView>

@@ -20,6 +20,7 @@ export function Add() {
       <SafeAreaView style={styles.container}>
         <TextInput 
           label="Descrição"
+          mode='flat'
           value={description}
           onChangeText={text => setDescription(text)}
         />

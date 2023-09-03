@@ -1,20 +1,27 @@
-import { Appbar, Menu } from 'react-native-paper';
+import { Appbar, Menu, useTheme } from 'react-native-paper';
 import { getHeaderTitle } from '@react-navigation/elements';
 import { NativeStackHeaderProps } from '@react-navigation/native-stack';
 import { useState } from 'react';
 
 export function CustomNavigationBar({ navigation, route, options, back }: NativeStackHeaderProps) {
-    const title = getHeaderTitle(options, route.name)
+    const title = getHeaderTitle(options, route.name);
+    const theme = useTheme();
     const [visible, setVisible] = useState(false);
     const openMenu = () => setVisible(true);
     const closeMenu = () => setVisible(false);
 
   return (
-    <Appbar.Header>
+    <Appbar.Header
+      style={{backgroundColor: theme.colors.primaryContainer}}
+    >
       {back ? <Appbar.BackAction onPress={navigation.goBack} /> : null}
-      <Appbar.Content title={title} />
+      <Appbar.Content title={title} titleStyle={{color: theme.colors.onPrimaryContainer}}/>
       {!back ? (
-        <Appbar.Action icon="magnify" onPress={() => {console.log("Click no botão")}} />
+        <Appbar.Action 
+          icon="magnify" 
+          color={theme.colors.onPrimaryContainer}
+          onPress={() => {console.log("Click no botão")}} 
+        />
       ) : null}
       {!back ? (
         <Menu
@@ -24,6 +31,7 @@ export function CustomNavigationBar({ navigation, route, options, back }: Native
             <Appbar.Action
               icon="dots-vertical"
               onPress={openMenu}
+              color={theme.colors.onPrimaryContainer}
             />
           }>
           <Menu.Item

@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import { StyleSheet, Text } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { StyleSheet, View } from "react-native";
 import { TextInput, useTheme } from 'react-native-paper';
 
 export function Add() {
@@ -10,21 +9,34 @@ export function Add() {
     const styles = StyleSheet.create({
       container: {
         flex: 1,
-        paddingStart: 24,
-        paddingEnd: 24,
-        backgroundColor: theme.colors.background
+        backgroundColor: theme.colors.background,
+      },
+      inputFormat: {
+        fontSize: theme.fonts.bodyLarge.fontSize,
+        backgroundColor: theme.colors.background,
       }
     })
 
+    console.log(theme.fonts.bodyLarge)
     return (
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
         <TextInput 
-          label="Descrição"
+          placeholder='Descrição'
+          left={<TextInput.Icon icon='playlist-edit' />}
           mode='flat'
           value={description}
+          style={styles.inputFormat}
           onChangeText={text => setDescription(text)}
         />
-      </SafeAreaView>
+        <TextInput 
+          placeholder='R$ 0,00'
+          left={<TextInput.Icon icon='currency-brl' />}
+          mode='flat'
+          value={description}
+          style={styles.inputFormat}
+          onChangeText={text => setDescription(text)}
+        />
+      </View>
     );
   }
 

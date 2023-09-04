@@ -2,8 +2,15 @@ import { Appbar, Menu, useTheme } from 'react-native-paper';
 import { getHeaderTitle } from '@react-navigation/elements';
 import { NativeStackHeaderProps } from '@react-navigation/native-stack';
 import { useState } from 'react';
+import { View } from 'react-native';
 
-export function CustomNavigationBar({ navigation, route, options, back }: NativeStackHeaderProps) {
+interface CustomNavigationBarProps {
+  HeaderProps: NativeStackHeaderProps
+  IsHome: boolean
+}
+
+export function CustomNavigationBar({ HeaderProps, IsHome}: CustomNavigationBarProps) {
+    const { navigation, route, options, back } = HeaderProps
     const title = getHeaderTitle(options, route.name);
     const theme = useTheme();
     const [visible, setVisible] = useState(false);
@@ -15,15 +22,21 @@ export function CustomNavigationBar({ navigation, route, options, back }: Native
       style={{backgroundColor: theme.colors.primaryContainer}}
     >
       {back ? <Appbar.BackAction onPress={navigation.goBack} /> : null}
-      <Appbar.Content title={title} titleStyle={{color: theme.colors.onPrimaryContainer}}/>
       {!back ? (
         <Appbar.Action 
+        icon="menu" 
+        color={theme.colors.onPrimaryContainer}
+        onPress={() => {(navigation as any).openDrawer()}} 
+      />
+      ) : null}
+      <Appbar.Content title={title} titleStyle={{color: theme.colors.onPrimaryContainer}}/>
+      {!back && IsHome ? (
+        <View style={{flexDirection: 'row'}}>
+          <Appbar.Action 
           icon="magnify" 
           color={theme.colors.onPrimaryContainer}
           onPress={() => {console.log("Click no botão")}} 
         />
-      ) : null}
-      {!back ? (
         <Menu
           visible={visible}
           onDismiss={closeMenu}
@@ -54,6 +67,7 @@ export function CustomNavigationBar({ navigation, route, options, back }: Native
             disabled
           />
         </Menu>
+        </View>
       ) : null}
     </Appbar.Header>
   );

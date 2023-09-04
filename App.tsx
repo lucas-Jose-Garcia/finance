@@ -1,7 +1,7 @@
 import { useMaterial3Theme } from '@pchmn/expo-material3-theme';
 import { MD3DarkTheme, MD3LightTheme, PaperProvider, adaptNavigationTheme } from 'react-native-paper';
-import { StackNavigation } from './src/routes/stack';
 import { useColorScheme } from 'react-native';
+import { DrawerNavigation } from './src/routes/drawer';
 
 
 export default function App() {
@@ -15,7 +15,7 @@ export default function App() {
 
   return (
     <PaperProvider theme={paperTheme}>
-      <StackNavigation />
+      <DrawerNavigation />
     </PaperProvider>
   );
 }

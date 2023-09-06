@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { StyleSheet, View } from "react-native";
-import { Divider, IconButton, Switch, Text, TextInput, useTheme } from 'react-native-paper';
+import { FAB, TextInput, useTheme } from 'react-native-paper';
 import { DatePickerInput } from 'react-native-paper-dates';
 import { CustomSwitch } from '../components/CustomSwitch';
+import { CustomPicker } from '../components/CustomPicker';
 
 export function Add() {
     const theme = useTheme();
@@ -10,6 +11,7 @@ export function Add() {
     const [value, setValue] = useState('')
     const [inputDate, setInputDate] = useState<Date | undefined>(new Date())
     const [isEffected, setIsEffected] = useState(false)
+    const [category, setCategory] = useState('')
 
     const onToggleSwitch = () => setIsEffected(!isEffected);
     
@@ -24,6 +26,8 @@ export function Add() {
       }
     }
 
+    const listMock = ['Salário', 'Vale Alimentação']
+
     //#region Styles
     const styles = StyleSheet.create({
       container: {
@@ -36,7 +40,11 @@ export function Add() {
       },
       dateFormat: {
         position: 'relative',
-        
+      },
+      fab: {
+        bottom: 16,
+        right: 16,
+        position: 'absolute',
       }
     })
     //#endregion
@@ -59,6 +67,7 @@ export function Add() {
             value={value}
             style={styles.inputFormat}
             onChangeText={text => setValue(text)}
+            keyboardType='numeric'
           />
           <DatePickerInput 
             locale="pt"
@@ -73,7 +82,18 @@ export function Add() {
             options={configSwitch}
             onToggleSwitch={onToggleSwitch}
           />
+          <CustomPicker 
+            listItems={listMock}
+            selected={category}
+            setSelected={setCategory}
+          />
         </View>
+        <FAB
+              icon="content-save-outline"
+              label='Salvar'
+              style={styles.fab}
+              onPress={() => console.log('Pressed')}
+            />
       </View>
     );
   }

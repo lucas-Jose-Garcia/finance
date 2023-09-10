@@ -1,6 +1,6 @@
 import {Picker} from '@react-native-picker/picker';
 import { View } from 'react-native';
-import { IconButton, Text } from 'react-native-paper';
+import { IconButton, Text, useTheme } from 'react-native-paper';
 import { Separator } from './Separator';
 
 interface CustomPickerProps {
@@ -11,7 +11,7 @@ interface CustomPickerProps {
 
 
 export function CustomPicker({listItems, selected, setSelected}: CustomPickerProps) {
-
+    const theme = useTheme()
     return (
         <View>
             <Text variant='bodySmall' style={{paddingLeft: 12, paddingTop: 6}}>Categoria</Text>
@@ -27,7 +27,7 @@ export function CustomPicker({listItems, selected, setSelected}: CustomPickerPro
                                 setSelected(itemValue)
                             }}
                         >
-                            {listItems.map((item) => <Picker.Item key={item} label={item} value={item} />)}
+                            {listItems.map((item) => <Picker.Item key={item} label={item} value={item} style={{color: theme.colors.secondary }}/>)}
                         
                         </Picker>
                         <IconButton icon='plus' style={{paddingLeft: 8}}/>
